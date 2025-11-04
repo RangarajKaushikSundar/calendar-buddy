@@ -38,7 +38,7 @@ Note: Checkout the setup READMEs present within the Calendar service and smolage
 
 **Code**
 1. Tests: I got Gemini to generate the tool tests for me and am not a huge fan of the quality of tests. This would be refactored with high priority
-2. 
+2. Python code: The agent code is already bloated with tool definitions. This should be broken out by responsibilities.
 
 **Deployment**
 There were a few solutions considered for this project.
