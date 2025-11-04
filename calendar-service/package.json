@@ -1,0 +1,24 @@
+{
+  "name": "calendar-service",
+  "version": "1.0.0",
+  "description": "Exposes calendar CRUD operations",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/app.ts",
+    "build": "tsc",
+    "serve": "node dist/app.js"
+  },
+  "author": "Kaushik",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.0",
+    "express": "^5.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@types/express-validator": "^3.0.2",
+    "express-validator": "^7.3.0"
+  }
+}
