@@ -23,7 +23,7 @@ Follow these steps to set up and run the project on your local machine.
 ### Prerequisites
 
 -   Node.js (v18.x or later)
--   Python (v3.10 or later)
+-   Python (v3.12 works for googlemaps and gradio, later versions seem to have compat issues)
 -   `npm` (comes with Node.js)
 -   `pip` (comes with Python)
 
@@ -70,11 +70,11 @@ It's recommended to use a virtual environment.
 cd smolagents
 
 # Create and activate a virtual environment
-python -m venv venv
+python3.12 -m venv venv_stable
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 
 # Install Python packages
-pip install smolagents gradio requests python-dotenv
+pip install smolagents gradio requests python-dotenv googlemaps
 ```
 
 ## Running the Application
@@ -99,6 +99,7 @@ Open a second terminal and run the following commands:
 ```bash
 cd smolagents
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+
 python main.py
 ```
 

@@ -26,6 +26,8 @@ wheels/
 
 # Virtual Environments
 smolagents/venv/
+venv
+venv_stable/
 
 # Node
 calendar-service/node_modules/

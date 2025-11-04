@@ -45,13 +45,19 @@ def get_event_by_id(event_id: str) -> dict | str:
         return f"Error fetching event {event_id}: {e}"
 
 @tool
-@tool
 def get_eta(origin: str, destination: str) -> str:
     """
     Calculates real-time ETA between an origin and destination using the new Google Maps Routes API.
-    Requires the Routes API to be enabled in Google Cloud Console.
+    
+    Args:
+        origin (str): The starting point — either an address (e.g. "1600 Amphitheatre Parkway, Mountain View, CA")
+            or a "latitude,longitude" pair.
+        destination (str): The destination — either an address or "latitude,longitude" pair.
+
+    Returns:
+        str: A human-readable description of the estimated travel time and distance.
     """
-    import requests, json, os
+    import requests
 
     url = "https://routes.googleapis.com/directions/v2:computeRoutes"
     headers = {
@@ -60,12 +66,11 @@ def get_eta(origin: str, destination: str) -> str:
         "X-Goog-FieldMask": "routes.duration,routes.distanceMeters,routes.staticDuration"
     }
 
-    # Helper to parse address vs lat,lng
     def parse_location(loc):
-        if "," in loc and all(x.strip().replace(".", "").isdigit() for x in loc.split(",", 1)[0].split(".")):
-            lat, lng = [float(x) for x in loc.split(",")]
+        try:
+            lat, lng = map(float, loc.split(","))
             return {"latLng": {"latitude": lat, "longitude": lng}}
-        else:
+        except ValueError:
             return {"address": loc}
 
     body = {
@@ -93,45 +98,60 @@ def get_eta(origin: str, destination: str) -> str:
     except requests.exceptions.RequestException as e:
         return f"Error calling Google Routes API: {e}"
 
-
 @tool
-def get_all_locations() -> list | str:
+def get_all_locations() -> list:
     """
     Gets all known locations from the calendar service.
-    Returns a list of location objects.
+    Always returns a list. On error returns an empty list.
     """
     try:
         response = requests.get(f"{CALENDAR_API_BASE}/location/get")
         response.raise_for_status()
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        return f"Error fetching locations: {e}"
+        data = response.json()
+        if isinstance(data, list):
+            return data
+        # if API returns a single object or unexpected type, try to normalize
+        return list(data) if data else []
+    except requests.exceptions.RequestException:
+        return []
 
 @tool
-def get_lat_long_for_address(address: str) -> dict | str:
+def get_lat_long_for_address(address: str) -> tuple | None:
     """
-    Gets the latitude and longitude for a given address using Google Maps.
+    Uses the Google Maps Geocoding API to get latitude and longitude for an address.
 
     Args:
-        address: The address to geocode (e.g., '1600 Amphitheatre Parkway, Mountain View, CA').
+        address (str): The address to geocode, e.g., "Dishoom shoreditch".
+
+    Returns:
+        tuple or None: A tuple (latitude, longitude) on success, or None on failure.
     """
-    url = "https://maps.googleapis.com/maps/api/geocode/json"
-    params = {"address": address, "key": GOOGLE_MAPS_API_KEY}
+    # Prefer using the googlemaps client if it's available, otherwise fall back to the HTTP Geocoding API.
     try:
-        response = requests.get(url, params=params)
-        response.raise_for_status()
-        data = response.json()
-        if data["status"] == "OK":
-            location = data["results"][0]["geometry"]["location"]
-            return {
-                "latitude": location["lat"],
-                "longitude": location["lng"],
-                "formatted_address": data["results"][0]["formatted_address"],
-            }
+        import googlemaps
+        from googlemaps.exceptions import ApiError
+        gmaps = googlemaps.Client(key=GOOGLE_MAPS_API_KEY)
+
+        geocode_result = gmaps.geocode(address)
+        print(f"Geocode result: {geocode_result}")
+        if geocode_result:
+            location = geocode_result[0]['geometry']['location']
+            latitude = location['lat']
+            longitude = location['lng']
+            print(f"✅ Success: Address '{address}' -> Lat: {latitude}, Lng: {longitude}")
+            return latitude, longitude
+        
         else:
-            return f"Google Maps Geocoding API Error: {data.get('error_message', data['status'])}"
-    except requests.exceptions.RequestException as e:
-        return f"Error calling Google Maps Geocoding API: {e}"
+            print(f"⚠️ Warning: Could not find coordinates for address: '{address}'")
+            return None
+
+    # Catch all relevant API errors, including geocoding issues
+    except ApiError as e:
+        print(f"❌ API Error: Check your API key, billing, or if the Geocoding API is enabled. Details: {e}")
+        return None
+    except Exception as e:
+        print(f"❌ An unexpected error occurred: {e}")
+        return None
 
 @tool
 def create_event(title: str, start_datetime: int, end_datetime: int, location_name: str, latitude: float, longitude: float) -> dict | str:
