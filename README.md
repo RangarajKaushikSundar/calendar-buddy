@@ -115,3 +115,18 @@ The Gradio UI will launch, and the console will display the local URL (e.g., `ht
 -   "Book a 1-hour meeting with the design team at the office tomorrow at 11 AM."
 -   "What's the ETA for my next meeting? I'm at home."
 -   "Delete the 'Team Standup' event."
+
+
+## FEATURES WISHLIST
+**Agent**
+1. Conversational history: The code for this is commented out because the model is not sophesticated enough to handle large prompts
+2. Fine tune responses: The CodeAgent is pretty good in creating code to chain the tools, but sporadically creates it's own code ignoring an existing tool. Unsure if this is due to model quality or type of agent
+
+**Calendar**
+1. Persistence: There is no persistence for the calendar. Simple solution would be to use file persistence, a better way would be to use a database.
+
+**Deployment**
+There were a few solutions considered for this project.
+1. AWS stack: Bedrock (agent) + Lambda (Calendar Service) + Dynamo (Calendar data)
+2. OpenAI/Gemini + deployed service
+3. Smolagents + Local server 
