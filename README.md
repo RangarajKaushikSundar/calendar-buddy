@@ -24,7 +24,12 @@ Note: Checkout the setup READMEs present within the Calendar service and smolage
 
 **Example Prompts:**
 -   "What's on my calendar for today?"
--   "Book a 1-hour meeting with the design team at the office tomorrow at 11 AM."
+<img width="708" height="257" alt="Screenshot 2025-11-04 at 11 12 07 PM" src="https://github.com/user-attachments/assets/dc2868a9-4abf-4a53-8a2a-186442b3a3c5" />
+
+-   "Create a meeting with the John team at the Shoreditch office tomorrow at 11 AM."
+<img width="1833" height="951" alt="Screenshot 2025-11-04 at 11 01 01 PM" src="https://github.com/user-attachments/assets/2f14c902-f190-4bcd-984d-8cfa9e09328c" />
+
+  
 -   "Delete the 'Team Standup' event."
 
 ## FEATURES WISHLIST
