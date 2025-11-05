@@ -6,7 +6,7 @@ This project is an intelligent calendar assistant that combines a Node.js backen
 
 - **Full Calendar Management**: Create, read, update, and delete calendar events through a robust API.
 - **Conversational AI**: Interact with your calendar using natural language.
-- **Google Maps Integration**: Automatically fetch latitude/longitude for new locations and get real-time ETAs for your events.
+- **Google Maps Integration**: Automatically fetch latitude/longitude for new locations
 - **Interactive Web UI**: A clean and simple chat interface powered by Gradio.
 
 ## Project Structure
