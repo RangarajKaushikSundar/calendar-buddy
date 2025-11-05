@@ -57,9 +57,9 @@ Note: Checkout the setup READMEs present within the Calendar service and smolage
 **Deployment**
 
 There were a few solutions considered for this project.
-1. AWS stack: Bedrock (agent) + Lambda (Calendar Service) + Dynamo (Calendar data) -_ Rejected due to cost reasons_
-2. OpenAI/Gemini + deployed service -_ Rejected due to cost reasons_
-3. Smolagents + Local server  -_ Accepted due to free reasons_
+1. AWS stack: Bedrock (agent) + Lambda (Calendar Service) + Dynamo (Calendar data) - _Rejected due to cost reasons_
+2. OpenAI/Gemini + deployed service - _Rejected due to cost reasons_
+3. Smolagents + Local server  - _Accepted due to free reasons_
 
 -----
 
