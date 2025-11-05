@@ -13,6 +13,8 @@ This project is an intelligent calendar assistant that combines a Node.js backen
 
 The project is organized into two main components:
 
+<kbd><img width="1234" height="450" alt="image" src="https://github.com/user-attachments/assets/55f916eb-b474-4954-880a-55fe6e5fe7bb" /></kbd>
+
 -   `calendar-service/`: A Node.js application that exposes a REST API for CRUD operations on the calendar.
 -   `smolagents/`: A Python application containing the AI agent, its tools, and the Gradio user interface.
 
