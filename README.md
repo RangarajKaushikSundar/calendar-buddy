@@ -24,15 +24,17 @@ Note: Checkout the setup READMEs present within the Calendar service and smolage
 
 **Example Prompts:**
 -   "What's on my calendar for today?"
-<img width="708" height="257" alt="Screenshot 2025-11-04 at 11 12 07 PM" src="https://github.com/user-attachments/assets/dc2868a9-4abf-4a53-8a2a-186442b3a3c5" />
+
+<kbd><img width="708" height="257" alt="Screenshot 2025-11-04 at 11 12 07 PM" src="https://github.com/user-attachments/assets/dc2868a9-4abf-4a53-8a2a-186442b3a3c5" /></kbd>
 
 -   "Create a meeting with the John team at the Shoreditch office tomorrow at 11 AM."
-<img width="1833" height="951" alt="Screenshot 2025-11-04 at 11 01 01 PM" src="https://github.com/user-attachments/assets/2f14c902-f190-4bcd-984d-8cfa9e09328c" />
+
+<kbd><img width="1833" height="951" alt="Screenshot 2025-11-04 at 11 01 01 PM" src="https://github.com/user-attachments/assets/2f14c902-f190-4bcd-984d-8cfa9e09328c" /></kbd>
 
   
 -   "Delete the 'Team Standup' event."
 
-## FEATURES WISHLIST
+## FEATURES/ IMPROVEMENTS WISHLIST
 **Agent**
 1. Conversational history: The code for this is commented out because the model is not sophesticated enough to handle large prompts
 2. Fine tune responses: The CodeAgent is pretty good in creating code to chain the tools, but sporadically creates it's own code ignoring an existing tool. Unsure if this is due to model quality or type of agent
@@ -40,6 +42,7 @@ Note: Checkout the setup READMEs present within the Calendar service and smolage
 
 **Calendar**
 1. Persistence: There is no persistence for the calendar. Simple solution would be to use file persistence, a better way would be to use a database.
+2. Pre-populate: I wanted to prepopulate the calendar + locations with the test data shared, but never got around. I ended up using the agent to always create and delete the events. _(except for one time when the agent went crazy and created 100 duplicate events)_
 
 **Code**
 1. Tests: I got Gemini to generate the tool tests for me and am not a huge fan of the quality of tests. This would be refactored with high priority
